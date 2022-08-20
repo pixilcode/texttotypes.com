@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400&display=swap'
+@import 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap'
 
 // The vertical ratio, 1.618 (phi)
 //
@@ -21,13 +21,16 @@ $h-ratio: 9 / 16
 $background-color: #e2ffe9
 $text-color: #39493a
 
+// Spacing
+$gutter-width: (1 - $h-ratio) / 4 * 100vw
+
 @mixin header-text
   font-family: 'Source Code Pro', monospace
-  font-weight: 400
+  font-weight: 600
 
 @mixin body-text
   font-family: 'Source Code Pro', monospace
-  font-weight: 300
+  font-weight: 400
 
 html
   font-size: #{1em * $v-ratio}
@@ -35,19 +38,55 @@ html
   background-color: $background-color
 
 body
-  margin: 0 #{(1 - $h-ratio) / 2 * 100vw}
+  margin: 0 $gutter-width
 
-header h1
+h1, h2, h3, h4, h5, h6
   @include header-text
 
-header .inverse
-  color: $background-color
-  background-color: $text-color
-  border-radius: 10px
-  padding: 0 #{ 0.5rem * $h-ratio }
-  margin: 0 #{ 0.5rem * $h-ratio }
+p, a, li
+  @include body-text
+
+header
+  .inverse
+    color: $background-color
+    background-color: $text-color
+    border-radius: 10px
+    padding: 0 #{ 0.5rem * $h-ratio }
+    margin: 0 #{ 0.5rem * $h-ratio }
+
+nav
+  ul
+    @include header-text
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
+  li
+    list-style-type: none
+    padding: 0.5rem
+    margin-left: 0.75rem
+
+  a
+    font-size: 1.5rem
+    color: $text-color
+    text-decoration: none
+
+  a:hover
+    text-decoration: underline
 
 *
   margin: 0
   padding: 0
   line-height: #{100% * $v-ratio}
+
+@media only screen and (min-width: 961px)
+  body
+    margin: 0 #{ $gutter-width * 2 }
+
+  nav
+    ul
+      flex-direction: row
+    li
+      font-size: 1.25rem
+      padding: 0.125rem
+      margin: 0

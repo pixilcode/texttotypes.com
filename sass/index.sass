@@ -1,3 +1,43 @@
 @import 'common'
 
+body
+  margin: 0
+  display: grid
+  grid-template-columns: $gutter-width auto $gutter-width
+  grid-template-areas: ". header ." ". main ." ". aside ."
+  gap: 0 5vw
 
+
+header 
+  margin: #{ $v-ratio * 0.75rem } 0 #{ $v-ratio * 1.5rem }
+  grid-area: header
+
+  h1
+    font-size: 3rem
+
+main
+  grid-area: main
+
+#about
+  grid-area: aside
+  // TODO Change this?
+  font-size: 0.75rem
+  color: $background-color
+  background-color: $text-color
+  border-radius: 10px
+  padding: 2.5vw
+
+.cards
+  display: flex
+
+  li
+    list-style-type: none
+    flex: 1
+  
+@media only screen and (min-width: 961px)
+  body
+    grid-template-columns: #{$gutter-width * 2} auto #{$gutter-width * 2}
+    grid-template-areas: ". header ." ". main aside"
+
+  #about
+    border-radius: 10px 0 0 10px
