@@ -1,3 +1,5 @@
+{# A template for a single page on the website #}
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,26 +7,13 @@
 {% endblock title %}
 
 {% block body %}
-
-  <header>
-    <h1 id="title"><a href="/">Cosmos</a></h1>
-    <h2 id="subtitle">Lessons from the creation of our world</h2>
-  </header>
-
-  <hr />
-
-  {% if page.extra["prev"] %}
-  <a class="nav" id="prev" href="{{ page.extra["prev"].url }}">〈 {{ page.extra["prev"].title }}</a>
-  {% endif %}
-
-  <main>
-    {{ page.content | safe }}
-  </main>
-
-  {% if page.extra["next"] %}
-  <a class="nav" id="next" href="{{ page.extra["next"].url }}">{{ page.extra["next"].title }} 〉</a>
-  {% endif %}
-
+<header>
+  <h1>text<span class="inverse">to</span>types</h1>
+  {% include "_nav.html" %}
+</header>
+<main>
+  {{ page.content | safe }}
+</main>
 {% endblock body %}
 
 {% block styles %}
