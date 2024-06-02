@@ -1,0 +1,131 @@
+@import 'https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap';
+
+// The vertical ratio, 1.618 (phi)
+//
+// The vertical ratio is used to determine heights, line spacing,
+// top/bottom margins/paddings, etc.
+$v-ratio: 1.618;
+
+// The horizontal ratio, 9 / 16
+//
+// The horizontal ratio is used to determine the width of the
+// main portion of the body (this value isn't used much other
+// than that, it's mostly there for keeping track of design
+// choices.
+//
+// Horizontally, at least while dealing with a computer screen,
+// the screen will be treated as if it has 16 columns.
+$h-ratio: 9 / 16;
+
+// Color scheme
+$background-color: #e2ffe9;
+$text-color: #39493a;
+
+// Spacing
+$gutter-width: (1 - $h-ratio) / 4 * 100vw;
+
+@mixin header-text {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 600;
+}
+
+@mixin body-text {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
+}
+
+html {
+  font-size: #{1em * $v-ratio};
+  color: $text-color;
+  background-color: $background-color;
+}
+
+body {
+  margin: 0 $gutter-width;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include header-text;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.125rem;
+}
+
+p,
+a,
+li {
+  @include body-text;
+}
+
+a {
+  text-decoration: underline;
+  color: $text-color;
+}
+
+header {
+  .inverse {
+    color: $background-color;
+    background-color: $text-color;
+    border-radius: 10px;
+    padding: 0 #{ 0.5rem * $h-ratio };
+    margin: 0 #{ 0.5rem * $h-ratio };
+  }
+}
+
+nav {
+  ul {
+    @include header-text;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  li {
+    list-style-type: none;
+    padding: 0.5rem;
+    margin-left: 0.75rem;
+  }
+  a {
+    font-size: 1.5rem;
+    color: $text-color;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  line-height: #{100% * $v-ratio};
+}
+
+@media only screen and (min-width: 961px) {
+  body {
+    margin: 0 #{ $gutter-width * 2 };
+  }
+  nav {
+    ul {
+      flex-direction: row;
+    }
+    li {
+      font-size: 1.25rem;
+      padding: 0.125rem;
+      margin: 0;
+    }
+  }
+};
