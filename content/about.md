@@ -1,3 +1,6 @@
++++
+title = 'about'
++++
 # About
 
 Greetings! I am a passionate Computer Science student with a profound interest
