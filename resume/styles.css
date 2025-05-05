@@ -1,0 +1,577 @@
+/* store part of my phone number and email
+   in the CSS so that bots have a harder time
+   scraping for it */
+.phone .start-text:after {
+  content: '(614)';
+}
+
+.email .start-text:after {
+  content: 'brendon.bown';
+}
+
+/* shared styles */
+:root {
+  --skill-bkg: var(--cream);
+  --skill-txt: color-mix(in oklch, var(--cream), black);
+}
+
+.education {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "school school"
+    "location graduation"
+    "degree degree"
+    "minor minor"
+    "details details";
+
+  h3 {
+    grid-area: header;
+  }
+  
+  .school {
+    grid-area: school;
+  }
+  
+  .location {
+    grid-area: location;
+  }
+  
+  .graduation {
+    grid-area: graduation;
+    justify-self: end;
+  }
+  
+  .degree {
+    grid-area: degree;
+  }
+  
+  .minor {
+    grid-area: minor;
+  }
+  
+  .edu-details {
+    grid-area: details;
+  }
+}
+
+/* NOTE: needs to be a div because there is
+         also a section named 'experience' */
+div.experience {
+  display: grid;
+  grid-template-areas:
+    "organization location"
+    "position     duration"
+    "details      details ";
+  grid-template-columns: 1fr auto;
+  
+  .organization {
+    grid-area: organization;
+  }
+  
+  .location {
+    grid-area: location;
+  }
+  
+  .position {
+    grid-area: position;
+  }
+  
+  .duration {
+    grid-area: duration
+  }
+  
+  .job-details {
+    grid-area: details;
+  }
+  
+  .location, .duration {
+    justify-self: end;
+  }
+}
+
+/* screen-only styles */
+@media screen {
+  :root {
+    --v-std-padding: calc(var(--v-unit) * 2);
+    --section-padding: calc(var(--v-std-padding) * 3/4);
+    --item-padding: calc(var(--section-padding) / 2);
+  }
+  
+  /* hide phone details - if you can find this, you can have it */
+  .phone {
+    display: none !important;
+  }
+  
+  .iconed {
+    --icon-width: 1.5rem;
+    --icon-padding: var(--h-unit);
+    
+    display: flex;
+    align-items: center;
+  
+    .icon {
+      width: var(--icon-width);
+      margin-right: var(--icon-padding);
+    }
+  }
+  
+  .resume-header {
+    margin: var(--v-std-padding) 0;
+    
+    h1, h2 {
+      margin-bottom: 0;
+    }
+  }
+  
+  .side-bar, .main-content {
+    display: flex;
+    flex-direction: column;
+    
+    section {
+      margin: var(--section-padding) 0;
+    }
+  }
+    
+  .side-bar {
+    .contact {
+      order: 1;
+    }
+    
+    .skills {
+      order: 2;
+    }
+    
+    .education {
+      order: 3;
+    }
+    
+    .contact, .skills {
+      display: flex;
+      flex-direction: column;
+      row-gap: var(--item-padding);
+    }
+    
+    .education {
+      h3 {
+        padding-bottom: var(--item-padding);
+      }
+      
+      .school {
+        font-weight: bold;
+      }
+      
+      .location, .graduation {
+        font-style: italic;
+        margin-bottom: calc(var(--item-padding) / 2);
+      }
+      
+      .edu-details {
+        margin: var(--item-padding) 0;
+        padding-left: 1.5rem;
+        
+        display: flex;
+        flex-direction: column;
+        row-gap: calc(var(--item-padding) / 2);
+        
+        .class-name {
+          font-weight: bold;
+        }
+      }
+    }
+    
+    .skills {
+      ul {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        row-gap: calc(var(--item-padding) / 2);
+        column-gap: var(--h-unit);
+        
+        margin: var(--item-padding) 0;
+        justify-content: start;
+      }
+      
+      .skill {
+        background-color: var(--skill-bkg);
+        color: var(--skill-txt);
+        list-style: none;
+        padding: calc(var(--item-padding) / 2);
+      }
+    }
+  }
+  
+  .main-content {
+    display: flex;
+    flex-direction: column;
+    
+    div.experience {
+      margin: var(--item-padding) 0;
+      
+      .organization {
+        font-weight: bold;
+      }
+      
+      .position {
+        font-weight: bold;
+      }
+      
+      .location, .position, .duration {
+        font-style: italic;
+      }
+      
+      .job-details {
+        margin: var(--item-padding) 0;
+        padding-left: 1.5rem;
+        
+        .item {
+          padding: calc(var(--item-padding) / 2) 0;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 990px) {
+  :root {
+    --side-bar-width: 9fr;
+    --main-content-width: 16fr;
+  }
+  
+  main {
+    display: grid;
+    grid-template-areas:
+      "head     head        "
+      "side-bar main-content";
+    grid-template-columns: var(--side-bar-width) var(--main-content-width);
+    column-gap: calc(var(--h-unit) * 4);
+  }
+  
+  .resume-header {
+    grid-area: head;
+  }
+  
+  .side-bar {
+    grid-area: side-bar;
+  }
+  
+  .main-content {
+    grid-area: main-content;
+  }
+}
+
+/* print-only styles */
+@media print {
+  :root {
+    --page-width: 8.5in;
+    --page-height: 11in;
+
+    --aside-width: 10fr;
+    --main-width: 16fr;
+
+    --serif: 'Roboto Serif';
+    --sans-serif: Roboto;
+
+    --serif-bold: 500;
+    --serif-semibold: 400;
+    --serif-light: 200;
+
+    --base-color: #b5cdbe;
+    --standard-font-color: color-mix(in oklch, var(--base-color), black 75%);
+    --header-font-color: color-mix(in oklch, var(--base-color), black 55%);
+    --subheader-font-color: color-mix(in oklch, var(--base-color), black 40%);
+
+    --header-font-size: 24pt;
+    --h1-font-size: var(--header-font-size);
+    --h2-font-size: calc(var(--h1-font-size) * (3 / 4));
+
+    --standard-font-weight: 300;
+    --header-font-weight: 400;
+
+    --line-height: 125%;
+
+    --padding-unit-h: 0.25in;
+    --padding-unit-v: 0.4in;
+    --standard-padding-v: calc(var(--padding-unit-v) / 6);
+  }
+
+  body {
+    display: block;
+    
+    width: var(--page-width);
+    height: var(--page-height);
+  }
+
+  header {
+    display: none;
+  }
+  
+  main {
+    --icon-padding: 0.125in;
+    
+    display: grid;
+    grid-template-areas:
+      "title title"
+      "aside main";
+    grid-template-columns: var(--aside-width) var(--main-width);
+    grid-template-rows: auto 1fr;
+
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+
+    * {
+      box-sizing: content-box;
+      padding: 0;
+      margin: 0;
+      line-height: var(--line-height);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--sans-serif);
+      font-weight: var(--header-font-weight);
+      line-height: var(--line-height);
+      margin: 0;
+    }
+
+    h3,
+    h4 {
+      color: var(--subheader-font-color);
+    }
+
+    h1 {
+      font-size: var(--h1-font-size);
+      color: var(--standard-font-color);
+    }
+
+    h2 {
+      font-size: var(--h2-font-size);
+      color: var(--header-font-color);
+    }
+
+    h3 {
+      font-size: var(--h3-font-size);
+      padding-bottom: calc(var(--padding-unit-h) * (1/2));
+    }
+
+    h4 {
+      font-size: var(--h4-font-size);
+    }
+
+    li {
+      list-style: none;
+    }
+
+    li,
+    p {
+      font-size: var(--standard-font-size);
+      font-weight: var(--standard-font-weight);
+      color: var(--standard-font-color);
+      line-height: var(--line-height);
+    }
+
+    strong {
+      font-weight: var(--serif-bold);
+    }
+
+    .item,
+    .skill {
+      list-style: circle;
+      margin-left: 12pt;
+    }
+
+    .icon {
+      width: 12pt;
+      margin-right: var(--icon-padding);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .resume-header {
+      --padding: 0.5in 1in;
+      --background: var(--base-color);
+      --font-weight: 400;
+      --gap: calc(var(--h1-font-size) * (1 / 5));
+      --box-shadow-color: color-mix(in oklch, var(--base-color), black 15%);
+
+      grid-area: title;
+
+      padding: var(--padding);
+
+      background: var(--background);
+
+      font-family: var(--sans-serif);
+
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+
+      box-shadow: 0pt 1pt 4pt 1pt var(--box-shadow-color);
+      z-index: 1;
+    }
+
+    section {
+      padding: calc(var(--padding-unit-h) / 2) 0;
+    }
+
+    .side-bar {
+      --standard-font-size: 9pt;
+      --h3-font-size: calc(var(--h2-font-size) * (3/4));
+      --h4-font-size: calc(var(--h3-font-size) * (3/4));
+      --padding: 0.25in 0.5in;
+      --padding: calc(var(--padding-unit-v) / 2) calc(var(--padding-unit-h) * 2);
+
+      --background: color-mix(in oklch, var(--base-color), white 70%);
+
+      grid-area: aside;
+
+      padding: var(--padding);
+
+      background: var(--background);
+
+      p, li {
+        font-family: var(--serif);
+      }
+
+      .contact p {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .contact p:not(:last-child) {
+        margin-bottom: calc(var(--padding-unit-v) / 4);
+      }
+
+      .education {
+        --padding: var(--standard-padding-v);
+
+        .school {
+          font-weight: 600;
+        }
+
+        .location,
+        .graduation {
+          font-style: italic;
+          margin-bottom: var(--padding);
+        }
+
+        .graduation {
+          justify-self: end;
+        }
+
+        .minor {
+          margin-bottom: var(--padding);
+        }
+
+        .edu-details {
+          .item:not(:last-child) {
+            margin-bottom: var(--padding);
+          }
+
+          .class-title {
+            font-weight: var(--serif-bold);
+          }
+
+          .class-name::after,
+          .class-title::before {
+            content: ' ';
+          }
+        }
+      }
+
+      .skills {
+        --padding: calc(var(--standard-padding-v) / 2);
+
+        h4 {
+          margin-bottom: var(--padding);
+        }
+
+        .key-skills {
+          margin-bottom: var(--standard-padding-v);
+        }
+
+        .skill {
+          margin-bottom: var(--padding);
+        }
+      }
+    }
+
+    .main-content {
+      --standard-font-size: 10pt;
+      --h3-font-size: var(--h2-font-size);
+      --letter-spacing: 0.05pt;
+
+      --padding: calc(var(--padding-unit-v) / 2) calc(var(--padding-unit-h) * 2);
+      --background: color-mix(in oklch, var(--base-color), white 95%);
+
+      grid-area: main;
+
+      padding: var(--padding);
+
+      background: var(--background);
+
+      p, li {
+        font-family: var(--serif);
+        letter-spacing: var(--letter-spacing);
+      }
+
+      div.experience {
+        --padding: var(--standard-padding-v);
+
+        gap: calc(var(--padding) / 2);
+
+        &:not(:last-child) {
+          margin-bottom: calc(var(--padding) * 2);
+        }
+
+        .organization {
+          font-size: calc(var(--standard-font-size) + 1pt);
+          font-weight: var(--serif-bold);
+        }
+
+        .location {
+          justify-self: end;
+          align-self: end;
+          font-style: italic;
+        }
+
+        .position {
+          font-weight: var(--serif-bold);
+          font-style: italic;
+        }
+
+        .duration {
+          justify-self: end;
+          font-style: italic;
+        }
+
+        .job-details {
+          margin: var(--padding) 0;
+
+          .item {
+            font-weight: var(--serif-light);
+
+            &:not(:last-child) {
+              margin-bottom: calc(var(--padding));
+            }
+
+            strong {
+              font-weight: var(--serif-bold);
+            }
+          }
+        }
+      }
+
+      .volunteer-experience {
+        margin-top: var(--standard-padding-v);
+      }
+    }
+  }
+}
