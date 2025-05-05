@@ -2,29 +2,36 @@
   /* fonts */
   --sans-serif: 'Atkinson Hyperlegible Next', Helvetica, serif;
   --mono: 'Atkinson Hyperlegible Mono', Courier, mono;
-  
+
   /* layout */
   --v-unit: 1rem;
   --h-unit: min(1rem, 1vw);
-  
+
   --content-width: calc(var(--h-unit) * 75);
   --content-padding: calc(var(--h-unit) * 5);
-  
+
+  /* animation */
+  --hover-effect-duration: 0.2s;
+
   /* base colors */
-  
+
   /* https://coolors.co/231f20-1c878c-8f2400-f3dfa2-f8f5f1 */
   --black: #231f20;
   --blue: #1c878c;
   --red: #8f2400;
   --cream: #f3dfa2;
   --off-white: #f8f5f1;  
-  
+
   /* task colors */
   --header-bkg: var(--red);
   --header-txt: color-mix(in oklch, var(--red), white 90%);
   --nav-txt: var(--cream);
   --heading-txt: var(--blue);
   --body-bkg: var(--off-white);
+  --card-bkg: var(--cream);
+  --card-txt: var(--black);
+  --tag-bkg: color-mix(in oklch, var(--header-bkg), white 20%);
+  --tag-txt: white;
 }
 
 * {
@@ -39,9 +46,9 @@ body {
     ". head ."
     ". main .";
   grid-template-columns: 1fr var(--content-width) 1fr;
-  
+
   font-size: 1rem;
-  
+
   background-color: var(--body-bkg);
   color: var(--black);
 }
@@ -53,6 +60,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p, li {
   font-family: var(--sans-serif);
+  font-size: 1rem;
 }
 
 a {
@@ -63,65 +71,72 @@ header {
   --v-padding: calc(var(--v-unit) * 2);
   --h-padding: var(--content-padding);
   --header-gap: var(--v-padding);
-  
+
   grid-area: head;
-  
+
   display: flex;
   flex-direction: column;
   gap: var(--header-gap);
-  
+
   justify-content: space-between;
-    
+
   padding: var(--v-padding) var(--h-padding);
-  
+
   background-color: var(--red);
-  
+
   .title {
     --base-font-size: 1.5rem;
     --gap: 0.6rem;
-    
+
     a {
       font-family: var(--mono);
-      
+
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       align-items: end;
       column-gap: var(--gap);
     }
-    
+
     .logo {
       font-size: calc(var(--base-font-size) * 1.25);
       color: var(--header-txt);
       padding-right: var(--gap);
     }
-    
+
     .text {
       font-size: var(--base-font-size);
       color: var(--header-txt);
     }
   }
-  
+
   nav ul {
     --gap: var(--v-unit);
-    
+
     display: flex;
     flex-direction: column;
     gap: var(--gap);
-    
+
     li {
       list-style: none;
       font-size: 1.25rem;
       font-weight: 600;
-      
+
+      background: none;
+      transition: background-color var(--hover-effect-duration);
+
       a {
         padding: var(--gap);
         color: var(--nav-txt);
       }
-      
+
       a:before {
         content: "»";
         padding-right: 0.25rem;
+      }
+
+      &:hover {
+        background-color: color-mix(in oklch, var(--header-bkg), white 25%);
       }
     }
   }
@@ -130,15 +145,21 @@ header {
 main {
   --v-padding: calc(var(--v-unit) * 2);
   --h-padding: var(--content-padding);
-  
+
   grid-area: main;
-  
+
   padding: var(--v-padding) var(--h-padding);
-  
+
   h1 {
     font-size: 2rem;
+    margin-bottom: calc(var(--v-unit));
   }
-  
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: calc(var(--v-unit) * 0.75);
+  }
+
   h1, h2, h3, h4, h5, h6 {
     line-height: 100%;
   }
@@ -149,12 +170,8 @@ main {
     --v-padding: var(--v-unit);
     nav ul {
       --gap: calc(var(--h-unit) / 2);
-      
+
       flex-direction: row;
     }
-  }
-  
-  main {
-    --v-padding: var(--v-unit);
   }
 }

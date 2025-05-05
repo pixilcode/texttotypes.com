@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+                href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Mono:ital,wght@0,200..800;1,200..800&family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
+                rel="stylesheet">
+        <link rel="stylesheet" href="/common.css">
+        <link rel="stylesheet" href="/portfolio/styles.css">
+        <title>Portfolio - text to types</title>
+</head>
+
+<body>
+        <header>
+                <h1 class="title">
+                        <a href="/">
+                                <span class="logo">&lt;T&gt;</span>
+                                <span class="text">text</span>
+                                <span class="text">to</span>
+                                <span class="text">types</span>
+                        </a>
+                </h1>
+                <nav>
+                        <!-- TODO: maybe use a details element to make this collapsible for mobile? -->
+                        <ul>
+                                <li><a href="/">home</a></li>
+                                <li><a href="/portfolio">portfolio</a></li>
+                                <li><a href="/resume">resume</a></li>
+                                <li><a href="https://github.com/pixilcode">github</a></li>
+                        </ul>
+                </nav>
+        </header>
+
+        <main>
+                <section class="group programming-language-design"><h1>Programming Language Design</h1><ul class="items"><li class="item fixed-point-parser-framework"><a href="https://github.com/pixilcode/fpp-personal-parsers"><h3>Fixed-point Parser Framework</h3><ul class="tech"><li>OCaml</li></ul><p class="description"><strong>A parser framework that handles left-recursion and ambiguity</strong> using the mathematical concept of fixed points. This project was a part of research I did at BYU.</p><p class="completion">March 2025</p></a></li>
+
+<li class="item tego-typechecker"><a href="https://github.com/pixilcode/tego-type-checker"><h3>Tego Typechecker</h3><ul class="tech"><li>Coq</li></ul><p class="description"><strong>A typechecker for Tego</strong> with proofs incorporated. This helped me to explore the idea of adding typechecking to Tego.</p><p class="completion">December 2024</p></a></li>
+
+<li class="item js-subset-interpreter"><a href="https://github.com/pixilcode/js-subset-interpreter"><h3>JS Subset Interpreter</h3><ul class="tech"><li>OCaml</li></ul><p class="description"><strong>An interpreter for a subset of JavaScript</strong>.</p><p class="completion">March 2024</p></a></li>
+
+<li class="item designing-a-gradual-type-system"><a href="https://static.texttotypes.com/f9652ac4-2c5c-11f0-b5e0-3aa5a1c13538-gradual-typing.pdf"><h3>Designing a Gradual Type System</h3><ul class="tech"><li>Research</li></ul><p class="description"><strong>A literature review on gradual typing</strong>. This paper discusses implementation details of gradual typing, such as type enforcement and type errors.</p><p class="completion">June 2023</p></a></li>
+
+<li class="item tego-language"><a href="https://github.com/pixilcode/tego-lang"><h3>Tego Language</h3><ul class="tech"><li>Rust</li></ul><p class="description"><strong>A dynamically-typed functional programming language</strong> with linked lists as first class members.</p><p class="completion">December 2022</p></a></li></ul></section>
+
+<section class="group web-design"><h1>Web Design</h1><ul class="items"><li class="item travel-menu"><a href="https://static.texttotypes.com/a5c01582-1edd-11f0-98f4-539897cdd130-mom-visit-2025-04/"><h3>Travel Menu</h3><ul class="tech"><li>HTML/CSS</li></ul><p class="description"><strong>A menu showing meal options</strong>, designed for my mom when she visited in April 2025. The menu lists meals and their ingredients.</p><p class="completion">April 2025</p></a></li>
+
+<li class="item wedding-invitation"><a href="https://wedding.texttotypes.com"><h3>Wedding Invitation</h3><ul class="tech"><li>HTML/CSS</li><li>JavaScript</li><li>OCaml</li></ul><p class="description"><strong>A wedding invitation website</strong> that includes directions, RSVP, and a registry link. Note the <strong>responsive design</strong> and the ability to <strong>print</strong> an invitation in a standard 5x7 inch format.</p><p class="completion">June 2024</p></a></li>
+
+<li class="item new-testament-doctrines"><a href="https://ntdoctrines.texttotypes.com/"><h3>New Testament Doctrines</h3><ul class="tech"><li>HTML/CSS</li></ul><p class="description"><strong>A list of policies and doctrines from the New Testament</strong>, organized by book. This project was a final project for a religion class.</p><p class="completion">April 2023</p></a></li></ul></section>
+
+<section class="group cybersecurity"><h1>Cybersecurity</h1><ul class="items"><li class="item ringzer0-writeups"><a href="/content/ringzer0-writeups"><h3>RingZer0 Writeups</h3><ul class="tech"><li>Assorted</li></ul><p class="description"><strong>A collection of writeups for RingZer0 CTF challenges</strong>.</p><p class="completion">December 2023</p></a></li>
+
+<li class="item cs-465-projects"><a href="/content/cs465-projects"><h3>CS 465 Projects</h3><ul class="tech"><li>Assorted</li></ul><p class="description"><strong>A collection of projects from my CS 465 course</strong>.</p><p class="completion">December 2023</p></a></li>
+
+<li class="item secret-extraction-with-gdb"><a href="/content/cs465-projects/08-extracting-secrets"><h3>Secret Extraction with GDB</h3><ul class="tech"><li>GDB</li></ul><p class="description"><strong>A project that uses GDB to extract secrets</strong> from a binary.</p><p class="completion">November 2023</p></a></li>
+
+<li class="item password-cracking"><a href="/content/cs465-projects/07-password-cracking"><h3>Password Cracking</h3><ul class="tech"><li>John the Ripper</li></ul><p class="description"><strong>An explanation of how to use John the Ripper</strong> to crack passwords of varying difficulties.</p><p class="completion">November 2023</p></a></li>
+
+<li class="item hash-attack"><a href="/content/cs465-projects/02-hash-attack"><h3>Hash Attack</h3><ul class="tech"><li>Rust</li><li><unquote>R</unquote></li></ul><p class="description"><strong>An analysis of the collision and pre-image attacks</strong> on the SHA-1 hash function. This includes an implementation of each attack and a discussion of the results.</p><p class="completion">September 2023</p></a></li>
+
+<li class="item aes-encryption-implementation"><a href="https://github.com/pixilcode/aes-implementation-rs"><h3>AES Encryption Implementation</h3><ul class="tech"><li>Rust</li></ul><p class="description"><strong>An implementation of the AES encryption algorithm</strong> in Rust. The implementation is based on FIPS 197.</p><p class="completion">September 2023</p></a></li></ul></section>
+        </main>
+</body>
+
+</html>
