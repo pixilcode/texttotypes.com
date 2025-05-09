@@ -1,0 +1,15 @@
+.introduction p {
+	--p-padding: calc(var(--v-unit) * 2);
+	
+	padding: calc(var(--p-padding) / 2) 0;
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--p-padding) / 4);
+}
+
+@media screen and (min-width: 990px) {
+	.introduction p {
+		--p-padding: var(--v-unit);
+		display: block;
+	}
+}
