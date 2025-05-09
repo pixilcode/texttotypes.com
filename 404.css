@@ -1,0 +1,20 @@
+main {
+  display: flex;
+  flex-direction: column;
+  
+  margin: calc(var(--v-unit) * 2) 0;
+  
+  align-items: center;
+  
+  h1 {
+    font-size: 4rem;
+    text-align: center;
+  }
+  
+  p {
+    font-size: 1.5rem;
+    text-align: center;
+    
+    margin: calc(var(--v-unit)) 0;
+  }
+}
