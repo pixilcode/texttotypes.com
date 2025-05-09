@@ -1,0 +1,405 @@
+#lang pollen
+
+◊; TODO: Add explanation to this project
+
+# Project 7: Password Cracking
+
+Passwords are used all over the place in order to ensure that users are who they
+say they are. In theory, only the user should know the specific password that
+they chose. Therefore, a user can be authenticated by requiring them to provide
+the password that they originally chose.
+
+This requires that the service be able to verify that the password is correct.
+While the simplest way to do this would be to store the user's password in
+plaintext, this would be insecure, since a hacker that has access to the service
+would be able to use those passwords in order to authenticate as any user.
+Therefore, password security is created by using a hashing function.
+
+Instead of storing the password itself, the service stores the hash of the
+password. In addition, sometimes a *salt* (a random set of bits) is incorporated
+into the hash in order to add a source of randomness as an extra layer of
+protection.
+
+Because of the nature of cryptographic hash functions, the only way to determine
+a user's password is to continually guess passwords and compute their hashes
+until you find one that matches the hash. If passwords were randomly generated,
+this means that the best solution is to brute-force guess passwords. However,
+the passwords are usually created by humans who need some way to remember the
+password.
+
+The result of this is that passwords can often be guessed based on a list of
+words. Rather than just guessing random permutations of characters, hackers can
+instead guess modified versions of words in the wordlist. This makes cracking
+passwords a lot faster.
+
+
+## Simple Passwords
+
+In this project, I use John the Ripper in order to crack the following five
+passwords:
+
+```
+frank:9f9d51bc70ef21ca5c14f307980a29d8
+albert:b8b6718e7b997beaef8354ee1a1375a9
+susan:1f0d628aff498776c391d147d3f8d605
+shaniqua:a54eb809d56e632a229a27507664b3bd
+lafawnda:8b6e10530f75d23c0a0eca4d5671db7d
+```
+
+John the Ripper is a password-cracking tool that guesses passwords by hashing
+different strings until it finds a hash that matches the password's hash. It has
+some preset defaults that can be used with the following command (assuming the
+password hashes are found in the file `passwords.txt`):
+
+```bash
+john --format=raw-md5 passwords.txt
+```
+
+This command first runs an attack using a predefined wordlist. With this
+wordlist, it quickly finds the passwords for `frank` and `susan`, which are
+`bob` and `spiderman4`. Likely, `bob` is directly on the wordlist, and
+`spiderman4` is a concatenation of `spider`, `man`, and the number `4` added at
+the end.
+
+It then proceeds to use an incremental attack, going through every possible
+combination of ASCII characters to see if its hash matches the password hash.
+Doing this, it finds `lafawnda`'s password, `drstrange`, after about 5 minutes.
+
+When I ran this command, I left the process running in the background on one
+core for about four hours in order to see if it would break any of the other
+passwords. However, it was unable to break the two remaining passwords.
+
+My next attack on the passwords involved the following custom wordlist,
+`wordlist.lst` (based on the topic of 'superheros', which I've been told is the
+general topic of the websites these passwords are for):
+
+```
+avengers
+assemble
+batman
+drstrange
+ironman
+spiderman
+superman
+thor
+wonderwoman
+```
+
+In addition, I use a custom set of rules in order to test different mangled
+versions of the passwords. This is based on the wordlist rules syntax found at
+[https://www.openwall.com/john/doc/RULES.shtml](https://www.openwall.com/john/doc/RULES.shtml).
+The rules that I chose were:
+
+```
+[List.Rules:Custom]
+# do nothing
+:
+
+# uppercase all letters
+u
+
+# capitalize first letter and lowercase rest
+c
+
+# duplicate word
+d
+
+# try out common substitutions
+ss$ sa@ sl1 se3 sH#
+
+# add numbers to beginning and end
+A0"[0-9]"
+A0"[0-9]" A0"[0-9]"
+Az"[0-9]"
+Az"[0-9]" Az"[0-9]"
+A0"[0-9]" Az"[0-9]"
+
+# try different combinations of the above rules
+u ss$ sa@ sl1 se3 sH#
+c ss$ sa@ sl1 se3 sH#
+d ss$ sa@ sl1 se3 sH#
+u A0"[0-9]"
+u A0"[0-9]" A0"[0-9]" 
+u Az"[0-9]"
+u Az"[0-9]" Az"[0-9]"
+u A0"[0-9]" Az"[0-9]"
+c A0"[0-9]"
+c A0"[0-9]" A0"[0-9]"
+c Az"[0-9]"
+c Az"[0-9]" Az"[0-9]"
+c A0"[0-9]" Az"[0-9]"
+d A0"[0-9]"
+d A0"[0-9]" A0"[0-9]"
+d Az"[0-9]"
+d Az"[0-9]" Az"[0-9]"
+d A0"[0-9]" Az"[0-9]"
+u A0"[0-9]" ss$ sa@ sl1 se3 sH#
+u A0"[0-9]" A0"[0-9]" ss$ sa@ sl1 se3 sH#
+u Az"[0-9]" ss$ sa@ sl1 se3 sH#
+u Az"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+u A0"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+c A0"[0-9]" ss$ sa@ sl1 se3 sH#
+c A0"[0-9]" A0"[0-9]" ss$ sa@ sl1 se3 sH#
+c Az"[0-9]" ss$ sa@ sl1 se3 sH#
+c Az"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+c A0"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+d A0"[0-9]" ss$ sa@ sl1 se3 sH#
+d A0"[0-9]" A0"[0-9]" ss$ sa@ sl1 se3 sH#
+d Az"[0-9]" ss$ sa@ sl1 se3 sH#
+d Az"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+d A0"[0-9]" Az"[0-9]" ss$ sa@ sl1 se3 sH#
+```
+
+These rules were placed in a custom config file, `custom.conf` (based on the
+configuration found in `/etc/john/john.conf`. Finally, I ran John with the
+custom wordlist and custom config with the following command:
+
+```bash
+
+
+john passwords.txt \
+  --format=raw-md5 \
+  --config=john.conf \
+  --wordlist=wordlist.lst \
+  --rules:Custom
+```
+
+Running John with this custom wordlist and ruleset, I was able to find 4 of the
+5 passwords in less than a second. The only one I was unable to find was
+`frank`, since his password, `bob`, was not generated by the combination of
+wordlist and ruleset. However, I'd found his in my previous attempt, so this
+wasn't a problem.
+
+The resulting passwords that I found are:
+
+```
+frank:bob
+albert:Assemble
+susan:spiderman4
+shaniqua:Wonderwoman1
+lafawnda:drstrange
+```
+
+
+## Different Password Strengths
+
+In addition to trying to crack simple hashed passwords, I attempted a similar
+attempt on passwords that were hashed *and* incorporated a salt into the
+hashing. These passwords are assumed to be for a fishing website.
+
+### Picking Passwords
+
+I chose four passwords of varying difficulty:
+
+  * **Easy**: `catfish`
+
+  * **Average**: `s@lm0ns!`
+
+  * **Hard**: `fI$hIng4d@Ys`
+
+  * **Random 16-character sequence**: `ugPPdz0vpLJcevOi`
+
+I expected that the easy password would be broken almost immediately, since it's
+just a word (and a compound word nonetheless).
+
+I also expected that the average password would be broken pretty quickly since
+it was just a mangling of `salmon` with common substitutions. However, it does
+have an `s` at the end, and 'salmon' is not usually pluralized in that way. It
+also has `!` at the end, though that could easily be guessed.
+
+The hard password would likely be somewhat more difficult with a number in
+between two words, as well as common substitutions and vowel capitalization.
+
+The random password would likely be impossible to crack since the only way to
+guess it is incrementally, and guessing all permutations of a 16-character
+sequence takes an extremely long time.
+
+These are the expected difficulties of each password on its own. Adding in a
+salt increases the difficulty, since each guess would have to tried with each
+unique salt.
+
+
+### Hashing Passwords
+
+After picking the passwords that I was going to use, I generated a salted hash
+twice for each password with the following command:
+
+```bash
+mkpasswd --method=MD5 '<PASSWORD>' >> password-hash.txt
+```
+
+This resulted in the following salted hashes:
+
+```
+$1$f0RegMmL$nvbPx5GgBFsaClrM/twTS1
+$1$/8LtbXgM$ce1tKxnMsgrVnlUmJhLD90
+$1$bMGRoNNE$A1yxwXqFw6sFG5apqVLyD1
+$1$RRtthvZ5$YONokWI0LCkmmhAhCVkyC1
+$1$Atp8HQt.$ENSvI3/W27y3kzZo8uzki1
+$1$CRql5mjd$gdPM3theQO/0WaQj2yfEV.
+$1$U/ulEbUe$wTmYstM2qqzkYs0CxFxn80
+$1$osjKWLYy$CGOqGsvk2Zmfr5OxUYWVx0
+```
+
+
+### Breaking the Passwords
+
+To begin breaking the passwords, I decided to use John's builtin wordlist to see
+if it could find anything. This is done with the following command:
+
+```bash
+john passwords-hash.txt
+```
+
+This ran quickly, but it only found the easy `catfish` passwords. So the next
+option that I tried was to use a wordlist. I generated this wordlist by asking
+ChatGPT to provide me 50 common words, 50 words related to fishing, and as many
+species of fish as it could think of. After touching these up, I put them in a
+wordlist file, `wordlist.lst`. Then, I ran John with the wordlist and its
+built-in `Jumbo` word-mangling ruleset.
+
+```bash
+john password-hash.txt \
+  --rules:Jumbo \
+  --wordlist=wordlist.lst
+```
+
+However, using this word list, it still was unable to crack any of the passwords
+except the plaintext `catfish`. I didn't expect it to crack the hard password,
+since `days` was not in the wordlist. However, I was surprised to find that it
+didn't find the average password, even though `salmon` was on the wordlist.
+
+I made two more attempts to break the password, once using the `All` ruleset,
+which included popular custom rulesets, and once adding `day` to the wordlist.
+The `All` ruleset seemed a lot more in depth, and it was still running after 5
+minutes, though it hadn't found anything new. Adding `day` to the wordlist
+didn't help John to find the hard password.
+
+I also attempted to break the random 16-character alphanumeric password by
+configuring John to search that space only.
+
+```
+john password-hash.txt \
+  --length=16 \
+  --incremental=Alnum
+```
+
+However, this resulted in an error: 
+
+```
+Can't set max length larger than 15 for md5crypt format
+```
+
+Thus, of all the passwords that I chose earlier, only the easiest, `catfish`,
+was able to be quickly broken. This is only taking into account the first 5
+minutes of the `All` ruleset, though. It is possible that others could be broken
+if more time was allocated to completely run the `All` ruleset.
+
+
+## Questions
+1. **Did you use John the Ripper, Hashcat, or both?**
+
+   I used John the Ripper.
+
+
+2. **What are the 5 passwords you found? Please provide them in the
+   following format:**
+
+   ```
+   frank:bob
+   albert:Assemble
+   susan:spiderman4
+   shaniqua:Wonderwoman1
+   lafawnda:drstrange
+   ```
+
+
+3. **Assuming that you used your setup for this lab alone, how long do you
+   calculate that it would take to crack a 6-character alphanumeric
+   password? 8-characters? 10-characters? 12-characters? (use the c/s or H/s
+   measurement from your experiments).**
+
+   On average, my setup was running about 75,000 hashes per second. There
+   are 26 lowercase letters, 26 uppercase letters, and 10 numbers, which
+   means that there are 62 possible different characters. Thus, the
+   calculation of time would be as follows:
+
+   * *6 characters* 
+     - `num_possible = 62 ^ 6 = 56800235584` 
+     - `max_time = 56800235584 / 75000 = 757336` 
+     - `average_time = 757336 / 2 = 378668` 
+   * *8 characters* 
+     - `num_possible = 62 ^ 8 = 218340105584896` 
+     - `max_time = 218340105584896 / 75000 = 2911201407.7986135` 
+     - `average_time = 2911201407 / 2 = 1455600703` 
+   * *10 characters* 
+     - `num_possible = 62 ^ 10 = 839299365868340200` 
+     - `max_time = 839299365868340200 / 75000 = 11190658211577` 
+     - `average_time = 11190658211577 / 2 = 5595329105788` 
+   * *12 characters* 
+     - `num_possible = 62 ^ 12 = 3.226e+21` 
+     - `max_time = 3.226e+21 / 75000 = 43016890165305330` 
+     - `average_time = 43016890165305330 / 2 = 21508445082652664`
+
+
+4. **Recently, high-end GPUs have revolutionized password cracking. Hashcat
+   used 8 Nvidia RTX 4090s to reportedly achieve 300 billion hashes per
+   second. Consider your calculations in question #1, and redo them assuming
+   you had access to a system with 8 Nvidia RTX 4090s. Do your answers for
+   question #2 change?**
+
+   *NOTE: I was unsure of what questions #1 and #2 were, so I simply redid
+   the calculations*
+
+   At a rate of 300 billion hashes per second, the calculations would be as
+   follows:
+
+   * *6 characters* 
+     - `num_possible = 62 ^ 6 = 56800235584` 
+     - `max_time = 56800235584 / 300000000000 = 0.189 seconds` 
+     - `average_time = 0.189 / 2 = 0.094 seconds` 
+   * *8 characters* 
+     - `num_possible = 62 ^ 8 = 218340105584896` 
+     - `max_time = 218340105584896 / 300000000000 = 727.800 seconds` 
+     - `average_time = 727.800 / 2 = 363.900 seconds` 
+   * *10 characters* 
+     - `num_possible = 62 ^ 10 = 839299365868340200` 
+     - `max_time = 839299365868340200 / 300000000000 = 2797664.552 seconds` 
+     - `average_time = 2797664.552 / 2 = 1398832.276 seconds` 
+   * *12 characters* 
+     - `num_possible = 62 ^ 12 = 3.226e+21` 
+     - `max_time = 3.226e+21 / 300000000000 = 10754222541.326 seconds` 
+     - `average_time = 10754222541.326 / 2 = 5377111270.663 seconds`
+
+
+5. **Does the use of a salt increase password security? Why or why not?**
+
+   The salt does increase password security. It adds randomness to the hash
+   so that two passwords that are the exact same don't have the exact same
+   hash. In addition, it defeats pre-generated hashes, since it's impossible
+   to pre-generate a hash if the salt isn't known beforehand. And if each
+   user has their own individual hash, hackers must attack one password at a
+   time since the likelihood of a salt being in two different passwords is
+   extremely low.
+
+
+6. **Modern Linux distributions use a SHA-512 (rather than MD5) for hashing
+   passwords. Does the use of this hashing algorithm improve password
+   security in some way? Why or why not?**
+
+   Using the SHA-512 algorithm improves the security over MD5 since it is
+   relatively easy in today's world to produce a collision for MD5. SHA-512,
+   on the other hand, is much more difficult to find collisions for. In
+   addition, SHA-512 is slower than MD5. It's not noticeable enough for a
+   single password, but it reduces the amount of hashes per second that can
+   be computed.
+
+
+7. **Against any competent system, an online attack of this nature would not
+   be possible due to network lag, timeouts, and throttling by the system
+   administrator. Does this knowledge lessen the importance of offline
+   password attack protection?**
+
+   No. If a hacker is able to gain access to the password hashes and salts
+   directly, it should still be difficult to break them, since a hacker
+   could have access to powerful resources. 

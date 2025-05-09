@@ -1,0 +1,43 @@
+# Challenge 1 - Bypass Me If You Can
+
+*Written by kova.tuuli*
+
+The solution to this challenge is simple SQL injection. The username input
+isn't sanitized, so we can just enter `' OR TRUE; -- ` as the username and it
+will log us in as the first user in the database.
+
+## Explanation
+
+Imagine the SQL query that is being run to check the username and password is
+something like this:
+
+```sql
+SELECT * FROM users WHERE username = 'username' AND password = 'password';
+```
+
+where `username` and `password` are the values entered by the user. The page
+treats the user as logged in if the query returns at least one row. So, if we
+enter `' OR TRUE; -- ` as the username, the query will become:
+
+```sql
+SELECT * FROM users WHERE username = '' OR TRUE; -- ' AND password = '';
+```
+
+The `--` is a comment in SQL, so the rest of the query is ignored. Because the
+`WHERE` clause is now `WHERE username = '' OR TRUE`, it will always evaluate to
+true, so the query will return all the rows in the `users` table. The page will
+then treat the user as logged in using the first user in the table.
+
+## Vulnerabilities
+
+There are two main problems with the code in this challenge. The first is that
+the username input isn't sanitized (special characters like `'` aren't escaped),
+so it's possible to inject SQL by starting the input with `'`, since that closes
+the string that is supposed to contain the username.
+
+The second problem is that the SQL error message is displayed to the user, which
+tells the user that the input is vulnerable to SQL injection. In addition, the 
+error message mentions that the database is MySQL, which helps the attacker to
+know which SQL syntax to use. In general, error messages should never be passed
+from a database or library directly to the end user. Instead, they should be
+logged internally and the user should be shown a generic error message.
