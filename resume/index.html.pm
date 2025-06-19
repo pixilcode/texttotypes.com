@@ -89,7 +89,7 @@
                 ◊item{◊strong{Refactor the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
                 ◊item{◊strong{Reimplement the Oneil programming language in Rust} in order to improve performance and reliability}
                 ◊item{◊strong{Design a VS Code extension for Oneil} in order to improve the developer experience}
-                ◊item{◊strong{Advis on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
+                ◊item{◊strong{Advise on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
             }
         }
 
