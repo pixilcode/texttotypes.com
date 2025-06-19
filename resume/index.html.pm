@@ -81,6 +81,19 @@
 ◊main-content{
     ◊section["Experience"]{
         ◊experience{
+            ◊organization{CareWeather}
+            ◊position{Programming Language Designer}
+            ◊duration["May 2025" "Present"]
+            ◊location{Springville, UT}
+            ◊job-details{
+                ◊item{◊strong{Refactored the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
+                ◊item{◊strong{Reimplemented the Oneil programming language in Rust} in order to improve performance and reliability}
+                ◊item{◊strong{Designed a VS Code extension for Oneil} in order to improve the developer experience}
+                ◊item{◊strong{Advised on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
+            }
+        }
+
+        ◊experience{
             ◊organization{BYU CS Department}
             ◊position{Research Assistant}
             ◊duration["Sep 2024" "Apr 2025"]
@@ -92,7 +105,7 @@
             }
         }
 
-        ◊experience{
+        ◊experience[#:hide #t]{
             ◊organization{Lucid Software}
             ◊position{Software Engineer Intern}
             ◊duration["May 2024" "Sep 2024"]

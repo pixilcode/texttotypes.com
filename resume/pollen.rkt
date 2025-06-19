@@ -30,7 +30,6 @@
 (define side-bar (default-tag-function 'div #:class "side-bar"))
 (define degree (default-tag-function 'p #:class "degree"))
 (define edu-details (default-tag-function 'ul #:class "edu-details"))
-(define experience (default-tag-function 'div #:class "experience"))
 (define main-content (default-tag-function 'div #:class "main-content"))
 (define graduation (default-tag-function 'p #:class "graduation"))
 (define header (default-tag-function 'div #:class "resume-header"))
@@ -78,6 +77,10 @@
         `(span ((class "class-title")) ,class-title)))
 
 (define (skill #:hide [hide #f] . content) (apply item #:hide hide #:class-name "skill" content))
+
+(define (experience #:hide [hide #f] . content)
+  (let ([class (if hide "hidden experience" "experience")])
+    `(div ((class ,class)) ,@content)))
 
 (define (duration start end)
   (list 'p '((class "duration"))
