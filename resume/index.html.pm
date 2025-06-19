@@ -86,10 +86,10 @@
             ◊duration["May 2025" "Present"]
             ◊location{Springville, UT}
             ◊job-details{
-                ◊item{◊strong{Refactored the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
-                ◊item{◊strong{Reimplemented the Oneil programming language in Rust} in order to improve performance and reliability}
-                ◊item{◊strong{Designed a VS Code extension for Oneil} in order to improve the developer experience}
-                ◊item{◊strong{Advised on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
+                ◊item{◊strong{Refactor the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
+                ◊item{◊strong{Reimplement the Oneil programming language in Rust} in order to improve performance and reliability}
+                ◊item{◊strong{Design a VS Code extension for Oneil} in order to improve the developer experience}
+                ◊item{◊strong{Advis on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
             }
         }
 
@@ -100,8 +100,8 @@
             ◊location{Provo, UT}
             ◊job-details{
                 ◊item{◊strong{Read and analyze academic articles about parsing} in order to gain an understanding of fixed-point parsing}
-                ◊item{◊strong{Collaborate with advisor and other students} in order to deepen our understanding and discover new ideas}
-                ◊item{◊strong{Present in weekly meetings and in an annual research conference} in order to communicate findings}
+                ◊item{◊strong{Collaborated with advisor and other students} in order to deepen our understanding and discover new ideas}
+                ◊item{◊strong{Presented in weekly meetings and in an annual research conference} in order to communicate findings}
             }
         }
 
