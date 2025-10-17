@@ -81,7 +81,7 @@
 ◊main-content{
     ◊section["Experience"]{
         ◊experience{
-            ◊organization{CareWeather}
+            ◊organization{Care Weather}
             ◊position{Programming Language Designer}
             ◊duration["May 2025" "Present"]
             ◊location{Springville, UT}
