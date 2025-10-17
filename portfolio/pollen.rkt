@@ -11,8 +11,10 @@
         [title (list 'h1 name)])
     `(section
       ((class ,class))
-      ,title
-      ,@content)))
+      (details
+          ()
+          (summary () ,title)
+          ,@content))))
 
 (define (subgroup name . content)
   (let ([class (string-append "group " (to-kebab-case name))]
