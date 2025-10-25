@@ -25,6 +25,7 @@
 (define phone-icon '(img ((class "icon") (src "images/phone.svg") (alt "A phone icon"))))
 (define email-icon '(img ((class "icon") (src "images/email.svg") (alt "An email icon"))))
 (define github-icon '(img ((class "icon") (src "images/github.svg") (alt "A GitHub icon"))))
+(define website-icon '(img ((class "icon") (src "images/website.svg") (alt "A website icon"))))
 
 ; Simple Tags
 (define side-bar (default-tag-function 'div #:class "side-bar"))
@@ -51,6 +52,8 @@
   (iconed-tag 'p email-icon "email" attrs elems))
 (define-tag-function (github attrs elems)
   (iconed-tag 'p github-icon "github" attrs elems))
+(define-tag-function (website attrs elems)
+  (iconed-tag 'p website-icon "website" attrs elems))
 
 ; Section Tags
 (define (section name . content)

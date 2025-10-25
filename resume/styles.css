@@ -103,6 +103,11 @@ div.experience {
     display: none !important;
   }
   
+  /* hide website details - this should be obvious because you're on the website */
+  .website {
+      display: none !important;
+  }
+  
   .iconed {
     --icon-width: 1.5rem;
     --icon-padding: var(--h-unit);

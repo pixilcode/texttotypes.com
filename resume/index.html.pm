@@ -15,8 +15,9 @@
         ◊; the 'start-text' spans are used to add in the beginning part of the text
         ◊; this helps to avoid bots scraping the email and phone number
         ◊phone{◊span[#:class "start-text"] ◊string->symbol{nbsp}655-1432}
-        ◊email{◊span[#:class "start-text"] @gmail.com}
+        ◊email{◊span[#:class "start-text"] @proton.me}
         ◊github{github.com/pixilcode}
+        ◊website{texttotypes.com}
     }
 
     ◊section["Education"]{
@@ -35,7 +36,7 @@
             ◊edu-class-item["CS 312" #:hide #t]{Algorithm Design and Analysis}
             ◊edu-class-item["CS 324" #:hide #t]{Systems Programming}
             ◊edu-class-item["CS 330" #:hide #t]{Concepts of Programming Languages}
-            ◊edu-class-item["CS 340"]{Software Design}
+            ◊edu-class-item["CS 340" #:hide #t]{Software Design}
             ◊edu-class-item["CS 401R" #:hide #t]{Software Foundations}
             ◊edu-class-item["CS 465"]{Computer Security}
             ◊edu-class-item["IS 567"]{Cybersecurity & Pen Testing}
@@ -86,7 +87,7 @@
             ◊duration["May 2025" "Present"]
             ◊location{Springville, UT}
             ◊job-details{
-                ◊item{◊strong{Refactor the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
+                ◊item[#:hide #t]{◊strong{Refactor the Python implementation of the Oneil programming language} in order to apply software engineering best practices}
                 ◊item{◊strong{Reimplement the Oneil programming language in Rust} in order to improve performance and reliability}
                 ◊item{◊strong{Design a VS Code extension for Oneil} in order to improve the developer experience}
                 ◊item{◊strong{Advise on the syntax and design of the Oneil programming language} in order to improve usability and functionality}
@@ -125,7 +126,7 @@
             ◊location{Provo, UT}
             ◊job-details{
                 ◊item{◊strong{Designed pages with Vue and TypeScript} in order to produce applications that meet client specifications}
-                ◊item{◊strong{Developed APIs with TypeScript} in order to connect the front-end and back-end of applications}
+                ◊item[#:hide #t]{◊strong{Developed APIs with TypeScript} in order to connect the front-end and back-end of applications}
                 ◊item{◊strong{Maintained and updated APIs written in PHP} in order to adapt to new use cases and changing requirements}
                 ◊item[#:hide #t]{◊strong{Maintained and updated Terraform scripts} in order to automate the deployment of applications to AWS}
                 ◊item[#:hide #t]{◊strong{Transitioned authentication from CAS to SAML} in order to improve interoperability with other services}
