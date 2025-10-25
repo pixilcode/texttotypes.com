@@ -35,6 +35,7 @@
 			<!-- TODO: maybe use a details element to make this collapsible for mobile? -->
 			<ul>
 				<li><a href="/">home</a></li>
+				<li><a href="https://research.texttotypes.com">blog</a></li>
 				<li><a href="/portfolio">portfolio</a></li>
 				<li><a href="/resume">resume</a></li>
 				<li><a href="https://github.com/pixilcode">github</a></li>
