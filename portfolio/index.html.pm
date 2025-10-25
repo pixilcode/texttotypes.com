@@ -20,6 +20,13 @@ Whatever else I decide to put here
 
 ◊group["Programming Language Design"]{
 	◊items{
+	    ◊item[
+			#:title "Oneil Programming Language"
+			#:completion-date "Ongoing"
+			#:tech '("Rust")
+			#:url "https://github.com/careweather/oneil"
+		]{◊strong{A modeling language featuring dimensional units as types}. This language enables rapid prototyping of physical systems, such as satellites. This project is the main focus of my work at Care Weather.}
+
 		◊item[
 			#:title "Fixed-point Parser Framework"
 			#:completion-date "March 2025"
@@ -50,7 +57,7 @@ Whatever else I decide to put here
 
 		◊item[
 			#:title "Tego Language"
-			#:completion-date "December 2022"
+			#:completion-date "Ongoing"
 			#:tech '("Rust")
 			#:url "https://github.com/pixilcode/tego-lang"
 		]{◊strong{A dynamically-typed functional programming language} with linked lists as first class members.}
