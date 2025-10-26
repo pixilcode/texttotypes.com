@@ -12,7 +12,7 @@
     `(section
       ((class ,class))
       (details
-          ()
+          ((name "portfolio"))
           (summary () ,title)
           ,@content))))
 

@@ -6,7 +6,7 @@ main {
 }
 
 .group details {
-  --transition-time: 1s;
+  --transition-time: 500ms;
   
   summary {
     display: block;
@@ -23,29 +23,11 @@ main {
     margin-right: calc(var(--h-unit));
     transition: rotate var(--transition-time) ease;
   }
-  
-  &::details-content {
-    overflow: hidden;
-    
-    opacity: 0;
-    
-    transition: all var(--transition-time) ease;
-    transition-behavior: allow-discrete;
-    
-    @starting-style {
-      opacity: 0;
-      
-    }
-  }
 }
 
 .group details:open {
   summary h1::before {
     rotate: 90deg;
-  }
-  
-  &::details-content {
-    opacity: 1;
   }
 }
 

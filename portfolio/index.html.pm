@@ -3,8 +3,7 @@
 ◊(define-meta title "Portfolio")
 ◊(define-meta stylesheets ("/portfolio/styles.css"))
 
-◊; TODO: table of contents
-
+◊; TODO: use CSS to make tabs for each group
 ◊;{
 Group: cybersecurity
 - hash attack
