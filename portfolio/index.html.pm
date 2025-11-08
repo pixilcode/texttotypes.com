@@ -98,11 +98,11 @@ Whatever else I decide to put here
 		]{◊strong{A collection of writeups for RingZer0 CTF challenges}.}
 
 		◊item[
-			#:title "CS 465 Projects"
+			#:title "Computer Security Class Projects"
 			#:completion-date "December 2023"
 			#:tech '("Assorted")
 			#:url "/content/cs465-projects"
-		]{◊strong{A collection of projects from my CS 465 course}.}
+		]{◊strong{A collection of projects from my CS 465 course at BYU}.}
 
 		◊item[
 			#:title "Secret Extraction with GDB"

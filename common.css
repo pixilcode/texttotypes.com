@@ -32,6 +32,7 @@
   --card-txt: var(--black);
   --tag-bkg: color-mix(in oklch, var(--header-bkg), white 20%);
   --tag-txt: white;
+  --link-txt: var(--blue);
 }
 
 * {
@@ -65,6 +66,11 @@ p, li {
 
 a {
   text-decoration: none;
+  color: var(--link-txt);
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 header {
