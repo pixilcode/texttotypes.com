@@ -1,3 +1,5 @@
+#lang pollen
+
 # Challenge 1 - Bypass Me If You Can
 
 *Written by kova.tuuli*
@@ -36,7 +38,7 @@ so it's possible to inject SQL by starting the input with `'`, since that closes
 the string that is supposed to contain the username.
 
 The second problem is that the SQL error message is displayed to the user, which
-tells the user that the input is vulnerable to SQL injection. In addition, the 
+tells the user that the input is vulnerable to SQL injection. In addition, the
 error message mentions that the database is MySQL, which helps the attacker to
 know which SQL syntax to use. In general, error messages should never be passed
 from a database or library directly to the end user. Instead, they should be
