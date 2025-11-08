@@ -185,7 +185,7 @@ footer {
   grid-area: footer;
   
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   gap: 0.5rem;
   
@@ -193,6 +193,10 @@ footer {
   
   font-family: var(--sans-serif);
   font-style: italic;
+  
+  p {
+    text-align: center;
+  }
 }
 
 @media screen and (min-width: 990px) {
@@ -203,5 +207,9 @@ footer {
 
       flex-direction: row;
     }
+  }
+  
+  footer {
+    flex-direction: row;
   }
 }
