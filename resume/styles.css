@@ -311,6 +311,10 @@ div.experience {
     display: none;
   }
   
+  footer {
+    display: none;
+  }
+  
   main {
     --icon-padding: 0.125in;
     

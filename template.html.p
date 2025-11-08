@@ -46,6 +46,20 @@
 	<main>
 		◊(->html doc #:splice #t)
 	</main>
+
+	<footer>
+	    <p>
+	        &copy; 2025 Brendon Bown.
+        </p>
+        <p>
+            Built with
+		    <a href="https://docs.racket-lang.org/pollen/">Pollen</a>.
+		</p>
+		<p>
+		    Source code on
+			<a href="https://github.com/pixilcode/texttotypes.com">Github</a>.
+		</p>
+    </footer>
 </body>
 
 </html>
