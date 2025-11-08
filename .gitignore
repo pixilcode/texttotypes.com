@@ -1,2 +1,6 @@
 compiled/
 .git-old/
+output/
+
+# ignore generated html
+*.html
