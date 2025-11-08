@@ -61,6 +61,7 @@ main {
     
     &:hover {
       background-color: color-mix(in oklch, var(--card-bkg), white 25%);
+      text-decoration: none;
     }
     
     h3 {
