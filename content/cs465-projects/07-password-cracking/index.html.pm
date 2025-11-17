@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊(define-meta title "Password Cracking")
-◊(define-meta stylesheets ("/content/cs465-projects/styles.css"))
+◊(define-meta stylesheets ("/content/styles.css"))
 
 ◊h1{Password Cracking}
 

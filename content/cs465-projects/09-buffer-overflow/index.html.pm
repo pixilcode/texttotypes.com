@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊(define-meta title "Buffer Overflow")
-◊(define-meta stylesheets ("/content/cs465-projects/styles.css"))
+◊(define-meta stylesheets ("/content/styles.css"))
 
 ◊; TODO: give explanation of project
 

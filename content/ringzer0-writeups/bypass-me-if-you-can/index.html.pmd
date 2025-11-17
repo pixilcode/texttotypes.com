@@ -1,6 +1,15 @@
 #lang pollen
 
-# Challenge 1 - Bypass Me If You Can
+◊; TODO: automate title, challenge link, and "written by kova.tuuli"
+◊; TODO: automate adding style pages (to this and to cs465-projects)
+◊; TODO: change from markdown (.pmd) to pollen (.pm) and update syntax
+
+◊(define-meta title "Bypass Me If You Can")
+◊(define-meta stylesheets ("/content/styles.css"))
+
+# Bypass Me If You Can
+
+*[Challenge Link](https://ringzer0ctf.com/challenges/1)*
 
 *Written by kova.tuuli*
 

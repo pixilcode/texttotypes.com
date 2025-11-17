@@ -1,9 +1,7 @@
 #lang pollen
 
 ◊(define-meta title "CS 465 Projects")
-◊(define-meta stylesheets ("styles.css"))
-
-◊; TODO: add links to the projects
+◊(define-meta stylesheets ("/content/styles.css"))
 
 ◊h1{Computer Security Class Projects}
 

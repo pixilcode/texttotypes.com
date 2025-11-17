@@ -1,6 +1,11 @@
 #lang pollen
 
+◊(define-meta title "Hash Me If You Can")
+◊(define-meta stylesheets ("/content/styles.css"))
+
 # Hash Me If You Can
+
+*[Challenge Link](https://ringzer0ctf.com/challenges/13)*
 
 *Written by kova.tuuli*
 

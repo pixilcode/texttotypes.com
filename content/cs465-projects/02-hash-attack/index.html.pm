@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊(define-meta title "Hash Attack")
-◊(define-meta stylesheets ("/content/cs465-projects/styles.css"))
+◊(define-meta stylesheets ("/content/styles.css"))
 
 ◊h1{SHA-1 Hash Attack Analysis}
 
